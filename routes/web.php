@@ -18,5 +18,8 @@ Route::get('/', function () {
     return redirect('/series');
 });
 
-Route::resource('/series', SeriesController::class);
+Route::resource('/series', SeriesController::class)
+    ->only(['index', 'create', 'store']);
+
+Route::post('/series/destroy/{series}', [SeriesController::class, 'destroy'])->name('series.destroy');
 
