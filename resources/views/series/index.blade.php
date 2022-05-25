@@ -4,12 +4,14 @@
 
     <ul class="list-group">
         @foreach ($series as $serie)
-            <li class="list-group-item">
+            <li class="list-group-item d-flex justify-content-between align-itens-center">
                 {{ $serie->nome }}
 
                 <form action="{{ route('series.destroy', $serie->id) }}" method="post">
-                    <button class="btn btn-danger">
-                        X
+                    @csrf
+                    @method('DELETE');
+                    <button class="btn btn-danger btn-sm">
+                        <i class="bi bi-trash"></i>
                     </button>
                 </form>
             </li>
