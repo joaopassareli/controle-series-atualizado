@@ -29,6 +29,14 @@ class SeriesController extends Controller
             ->with('mensagem.sucesso', "Série '{$serie->nome}' adicionada com sucesso!");
     }
 
+    public function edit(Serie $serie, $novoNome){
+        $nomeAntigo = $serie->nome;
+        $serie->nome = $novoNome;
+
+        return to_route('series.index')
+            ->with('mensagem.sucesso', "A série '{$nomeAntigo}' foi alterada para '{$serie->nome}' com sucesso!");
+    }
+
     public function destroy(Serie $series) 
     {
         $series->delete();
