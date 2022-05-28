@@ -15,14 +15,9 @@
 
                 <div class="botoes d-flex">
 
-                    <form action="{{ route('series.edit', $serie->id)}}" method="post">
-                        @csrf
-                        @method('EDIT')
-                        <button class="btn btn-info btn-sm ">
-                            <i class="bi bi-pencil-square"></i>
-                        </button>
-                    </form>
-                    
+                    <a href="{{ route('series.edit', $serie->id) }}" class="btn btn-info btn-sm">
+                        <i class="bi bi-pencil-square"></i>
+                    </a>                    
 
                     <form action="{{ route('series.destroy', $serie->id) }}" method="post">
                         @csrf
