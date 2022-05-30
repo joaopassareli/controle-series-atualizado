@@ -26,9 +26,7 @@
                             <i class="bi bi-trash"></i>
                         </button>
                     </form>
-                </div>
-
-                
+                </div>    
             </li>
         @endforeach
     </ul>
