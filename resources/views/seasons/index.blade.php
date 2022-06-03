@@ -5,10 +5,9 @@
             <li class="list-group-item d-flex justify-content-between align-items-center">
                 Temporada nº {{ $season->number }}
 
-                <span class="bg bg-secondary">
+                <span class="badge rounded-pill bg-info">
                     {{ $season->episodes->count() }}
                 </span>
-            </li>
         @endforeach
     </ul>
 
