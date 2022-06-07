@@ -10,9 +10,22 @@
 </head>
 <body>
     <div class="container">
+
         <header>
-            <h1>{{ $title}}</h1>
+            <nav class="navbar navbar-light bg-light">
+                <div class="container">
+                  <a class="navbar-brand" href="{{ route('series.index')}}">
+                    Séries
+                  </a>
+                </div>
+              </nav>
+
+            <h1>{{ $title }}</h1>
         </header>
+
+        @isset($mensagemSucesso)
+            <div class="alert alert-success"> {{ $mensagemSucesso}} </div>  
+        @endisset
 
         @if ($errors->any())
             <div class="alert alert-danger">

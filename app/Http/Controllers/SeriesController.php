@@ -2,11 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Season;
 use App\Models\Series;
-use App\Models\Episode;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Repositories\SeriesRepository;
 use App\Http\Requests\SeriesFormRequest;
 
