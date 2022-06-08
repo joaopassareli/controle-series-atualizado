@@ -13,9 +13,12 @@
 
         <header>
             <nav class="navbar navbar-light bg-light">
-                <div class="container">
+                <div class="container-fluid">
                   <a class="navbar-brand" href="{{ route('series.index')}}">
                     Séries
+                  </a>
+                  <a href="{{ route('logout')}}" class="nav-item" style="color: red;">
+                      Sair
                   </a>
                 </div>
               </nav>
