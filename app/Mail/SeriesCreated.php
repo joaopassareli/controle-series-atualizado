@@ -18,7 +18,7 @@ class SeriesCreated extends Mailable
      */
     public function __construct(public string $seriesName, public int $idSerie, public int $qtySeasons, public int $qtyEpisodes)
     {
-        //
+        $this->subject = "Série $seriesName criada.";
     }
 
     /**

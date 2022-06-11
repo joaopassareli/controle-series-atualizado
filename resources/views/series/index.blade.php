@@ -1,6 +1,7 @@
 <x-layout title="Séries" :mensagem-sucesso="$mensagemSucesso">
-
-    <a href="{{ route('series.create') }}" class="btn btn-dark mb-2">Adicionar</a>
+    @auth
+        <a href="{{ route('series.create') }}" class="btn btn-dark mb-2">Adicionar</a>
+    @endauth
 
     <ul class="list-group">
         @foreach ($series as $serie)
@@ -10,18 +11,19 @@
                 </a>
                 
                 <div class="botoes d-flex">
+                    @auth
+                        <a href="{{ route('series.edit', $serie->id) }}" class="btn btn-info btn-sm">
+                            <i class="bi bi-pencil-square"></i>
+                        </a>                    
 
-                    <a href="{{ route('series.edit', $serie->id) }}" class="btn btn-info btn-sm">
-                        <i class="bi bi-pencil-square"></i>
-                    </a>                    
-
-                    <form action="{{ route('series.destroy', $serie->id) }}" method="post">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn btn-danger btn-sm ms-1">
-                            <i class="bi bi-trash"></i>
-                        </button>
-                    </form>
+                        <form action="{{ route('series.destroy', $serie->id) }}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger btn-sm ms-1">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </form>
+                    @endauth
                 </div>    
             </li>
         @endforeach
