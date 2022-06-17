@@ -9,11 +9,18 @@ use App\Repositories\SeriesRepository;
 use App\Http\Requests\SeriesFormRequest;
 
 class EloquentSeriesRepository implements SeriesRepository
-{
+{   
     public function add (SeriesFormRequest $request): Series
     {
+        //Neste dd o retorno é null
+        //dd($request->coverPath);
+
         return DB::transaction(function () use ($request) {
-            $serie = Series::create($request->all());
+            $serie = Series::create([
+                'nome' => $request->nome,
+                'cover_path' => $request->coverPath,
+            ]);
+
             $seasons = [];
             for ($i = 1; $i <= $request->seasonsQty; $i++) {
                 $seasons[] = [

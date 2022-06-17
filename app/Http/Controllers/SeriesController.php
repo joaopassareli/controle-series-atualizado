@@ -35,6 +35,17 @@ class SeriesController extends Controller
     public function store(SeriesFormRequest $request)
     {
         $serie = $this->repository->add($request);
+        $fileType = $request->file('cover')->getMimeType();
+
+        //Este if valida se o formato de capa recebido é em .gif, .png e .jpeg
+        if($fileType === 'image/gif' || $fileType === 'image/png' || $fileType === 'image/jpeg'){
+            $coverPath = $request->file('cover')->store('series_cover', 'public');
+            $request->coverPath = $coverPath;
+        }
+
+        //Neste DD o coverPath está com os valores corretos
+        //mas no EloquentSeriesRepository ele é enviado como NULL
+        //dd($request->coverPath);
 
         SeriesCreatedEvent::dispatch(
           $serie->nome,
