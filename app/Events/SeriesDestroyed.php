@@ -10,7 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class SeriesCreated
+class SeriesDestroyed
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -19,13 +19,11 @@ class SeriesCreated
      *
      * @return void
      */
-    public function __construct( 
-        public readonly string $seriesName,
-        public readonly int $seriesId,
-        public readonly int $seriesSeasonsQty,
-        public readonly int $seriesEpisodesPerSeason,
+    public function __construct(
         public readonly string $cover_path,
-    ){}
+    )
+    {        
+    }
 
     /**
      * Get the channels the event should broadcast on.

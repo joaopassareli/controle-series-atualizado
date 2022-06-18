@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\SeriesCreated as SeriesCreatedEvent;
+use App\Events\SeriesDestroyed;
 use App\Models\User;
 use App\Models\Series;
 use App\Mail\SeriesCreated;
@@ -33,25 +34,24 @@ class SeriesController extends Controller
     }
 
     public function store(SeriesFormRequest $request)
-    {
-        $serie = $this->repository->add($request);
-        $fileType = $request->file('cover')->getMimeType();
-
-        //Este if valida se o formato de capa recebido é em .gif, .png e .jpeg
-        if($fileType === 'image/gif' || $fileType === 'image/png' || $fileType === 'image/jpeg'){
+    {   
+        //Este if verifica se existe uma imagem inserida no input, se o retorno for positivo ele cria a série com a capa selecionada
+        //se for negativo ele utiliza o arquivo padrão "no_cover.gif" que fica armazenado na pasta storage/app/public/series_cover.
+        if($request->hasFile('cover')){
             $coverPath = $request->file('cover')->store('series_cover', 'public');
             $request->coverPath = $coverPath;
+        }else{
+            $request->coverPath = 'series_cover/no_cover.gif';
         }
-
-        //Neste DD o coverPath está com os valores corretos
-        //mas no EloquentSeriesRepository ele é enviado como NULL
-        //dd($request->coverPath);
+        
+        $serie = $this->repository->add($request);
 
         SeriesCreatedEvent::dispatch(
           $serie->nome,
           $serie->id,
           $request->seasonsQty,
-          $request->episodesPerSeason,  
+          $request->episodesPerSeason,
+          $request->coverPath,
         );
         
         return to_route('series.index')
@@ -67,6 +67,10 @@ class SeriesController extends Controller
     public function destroy(Series $series) 
     {
         $series->delete();
+
+        SeriesDestroyed::dispatch(
+            $series->cover_path,
+        );
 
         return to_route('series.index')
             ->with('mensagem.sucesso', "Série '{$series->nome}' removida com sucesso!");

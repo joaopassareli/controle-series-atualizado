@@ -5,11 +5,16 @@
 
     <ul class="list-group">
         @foreach ($series as $serie)
-            <li class="list-group-item d-flex justify-content-between align-itens-center">
-                <a href="{{ route('seasons.index', $serie->id) }}">
-                    {{ $serie->nome }}
-                </a>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
                 
+                <div class="d-flex align-items-center">
+                    <img src="{{ asset('storage/' . $serie->cover_path) }}" alt="Capa da série" class="img-thumbnail me-3" width="120">
+                    
+                    <a href="{{ route('seasons.index', $serie->id) }}" class="align-middle">
+                        {{ $serie->nome }}
+                    </a>
+                </div>
+                            
                 <div class="botoes d-flex">
                     @auth
                         <a href="{{ route('series.edit', $serie->id) }}" class="btn btn-info btn-sm">

@@ -25,6 +25,7 @@ class SeriesFormRequest extends FormRequest
     {
         return [
             'nome' => ['required', 'min:3', 'max:255'],
+            'cover' => ['mimes:jpeg,png,jpg,gif'],
         ];
     }
 
@@ -34,6 +35,7 @@ class SeriesFormRequest extends FormRequest
             'nome.required' => 'O campo nome é obrigatório e deve ser preenchido',
             'nome.min' => 'O campo nome deve possuir ao menos :min caracteres.',
             'nome.max' => 'O campo nome não pode possuir mais que :max caracteres',
+            'cover.mimes' => 'O arquivo de capa precisa estar nas extensões .jpeg, .png, .jpg, ou .gif',
         ];
     }
 }

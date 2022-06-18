@@ -12,9 +12,6 @@ class EloquentSeriesRepository implements SeriesRepository
 {   
     public function add (SeriesFormRequest $request): Series
     {
-        //Neste dd o retorno é null
-        //dd($request->coverPath);
-
         return DB::transaction(function () use ($request) {
             $serie = Series::create([
                 'nome' => $request->nome,

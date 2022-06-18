@@ -37,6 +37,7 @@ class EmailUsersAboutSeriesCreated implements ShouldQueue
                 $event->seriesId,
                 $event->seriesSeasonsQty,
                 $event->seriesEpisodesPerSeason,
+                $event->cover_path,
             );
             //Foi necessário incluir o método later ao enviar os e-mails pois o mailtrap na versão gratuita trava o envio de mais de 5 e-mails
             //em menos de 10 segundos. Assim, colocamos o contador $when pra enviar cada email de 5 em 5 segundos.
