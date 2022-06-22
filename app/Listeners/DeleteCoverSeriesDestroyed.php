@@ -29,7 +29,6 @@ class DeleteCoverSeriesDestroyed implements ShouldQueue
     {
         if($event->cover_path != 'series_cover/no_cover.gif'){
             Storage::disk('public')->delete([$event->cover_path]);
-        }
-               
+        }      
     }
 }

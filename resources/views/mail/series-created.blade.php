@@ -2,8 +2,8 @@
     
     # Série {{ $seriesName}} foi criada!
 
-    {{-- <img src="{{ asset('storage/' . $cover_path) }}" alt="Capa da série {!! $seriesName !!}" class="img-fluid" style="height: 400px; margin: auto;">
-    ![Capa da série {!! $seriesName !!}]({{asset('storage/' . $cover_path)}})         --}}
+    <img src="{{ asset('storage/' . $cover_path) }}" alt="Capa da série {!! $seriesName !!}" class="img-fluid" style="height: 400px; margin: auto;">
+    ![Capa da série {!! $seriesName !!}]({{asset('storage/' . $cover_path)}})
     ![Capa da série][capa]
     [capa]: {{ asset('storage/' . $cover_path) }}
     
