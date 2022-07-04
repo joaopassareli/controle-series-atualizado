@@ -16,6 +16,8 @@ class SeriesController extends Controller
 
     public function store (SeriesFormRequest $request)
     {
-        dd($request->all());
+        return response()
+            ->json(Series::create($request->all()),
+            201);
     }
 }
