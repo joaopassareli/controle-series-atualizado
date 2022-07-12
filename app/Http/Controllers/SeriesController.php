@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\SeriesCreated as SeriesCreatedEvent;
-use App\Events\SeriesDestroyed;
-use App\Models\User;
 use App\Models\Series;
-use App\Mail\SeriesCreated;
-use Illuminate\Support\Facades\Mail;
+use Illuminate\Http\Request;
+use App\Events\SeriesDestroyed;
 use App\Repositories\SeriesRepository;
 use App\Http\Requests\SeriesFormRequest;
+use App\Events\SeriesCreated as SeriesCreatedEvent;
 
 class SeriesController extends Controller
 {
@@ -19,7 +17,7 @@ class SeriesController extends Controller
     }
 
     public function index()
-    {    
+    {
         $series = Series::all();
         $mensagemSucesso = session('mensagem.sucesso');
 
@@ -34,7 +32,7 @@ class SeriesController extends Controller
     }
 
     public function store(SeriesFormRequest $request)
-    {   
+    {
         //Este if verifica se existe uma imagem inserida no input, se o retorno for positivo ele cria a série com a capa selecionada
         //se for negativo ele utiliza o arquivo padrão "no_cover.gif" que fica armazenado na pasta storage/app/public/series_cover.
         if($request->hasFile('cover')){
@@ -43,7 +41,7 @@ class SeriesController extends Controller
         }else{
             $request->coverPath = 'series_cover/no_cover.gif';
         }
-        
+
         $serie = $this->repository->add($request);
 
         SeriesCreatedEvent::dispatch(
@@ -53,18 +51,18 @@ class SeriesController extends Controller
           $request->episodesPerSeason,
           $request->coverPath,
         );
-        
+
         return to_route('series.index')
             ->with('mensagem.sucesso', "Série '{$serie->nome}' adicionada com sucesso");
     }
-    
+
     public function edit(Series $series)
     {
         return view('series.edit')
             ->with('serie', $series);
     }
 
-    public function destroy(Series $series) 
+    public function destroy(Series $series)
     {
         $series->delete();
 
