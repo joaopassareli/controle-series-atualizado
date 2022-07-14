@@ -38,3 +38,8 @@ Route::patch('/episodes/{episode}', function (Episode $episode, Request $request
 
     return $episode;
 });
+
+Route::post('login', function (Request $request){
+    $credentials = $request->only(['email', 'password']);
+    dd($credentials);
+});
